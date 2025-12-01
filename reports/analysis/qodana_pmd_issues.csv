@@ -1,0 +1,27 @@
+file,line,pmd_rules,pmd_msgs,q_rules,q_msgs,found_by
+reports/analysis/with-errors/jacoco/test/html/jacoco-resources/prettify.js,1273,,,RegExpUnexpectedAnchor,Anchor '^' in unexpected position,Qodana
+src/main/java/com/kov/votingsystem/exception/UnknownOptionException.java,4,MethodArgumentCouldBeFinal,Parameter 'message' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,12,AtLeastOneConstructor,Each class should declare at least one constructor,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,17,MethodArgumentCouldBeFinal;MethodArgumentCouldBeFinal,Parameter 'question' is not assigned and could be declared final | Parameter 'options' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,18,LocalVariableCouldBeFinal,Local variable 'poll' could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,24,MethodArgumentCouldBeFinal;MethodArgumentCouldBeFinal;MethodArgumentCouldBeFinal,Parameter 'pollId' is not assigned and could be declared final | Parameter 'participantId' is not assigned and could be declared final | Parameter 'option' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,26,LocalVariableCouldBeFinal,Local variable 'poll' could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,29,AvoidCatchingGenericException,"Avoid catching generic exceptions such as NullPointerException, RuntimeException, Exception in try-catch block",,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,34,MethodArgumentCouldBeFinal,Parameter 'pollId' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,35,LocalVariableCouldBeFinal,Local variable 'poll' could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,42,MethodArgumentCouldBeFinal,Parameter 'pollId' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/service/PollService.java,43,LocalVariableCouldBeFinal,Local variable 'poll' could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/exception/DuplicateVoteException.java,4,MethodArgumentCouldBeFinal,Parameter 'message' is not assigned and could be declared final,,,PMD
+target/cucumber-report.html,47,,,RegExpSingleCharAlternation;RegExpSingleCharAlternation;RegExpSingleCharAlternation;RegExpSingleCharAlternation;RegExpSingleCharAlternation;RegExpUnnecessaryNonCapturingGroup,Single character alternation in RegExp | Single character alternation in RegExp | Single character alternation in RegExp | Single character alternation in RegExp | Single character alternation in RegExp | Unnecessary non-capturing group '(?:[\x80-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])',Qodana
+reports/analysis/initial/jacoco/test/html/jacoco-resources/prettify.js,1273,,,RegExpUnexpectedAnchor,Anchor '^' in unexpected position,Qodana
+build.gradle.kts,40,,,VulnerableLibrariesLocal,Provides transitive vulnerable dependency maven:org.apache.commons:commons-lang3:3.17.0 CVE-2025-48924 5.3 Insufficient Information Results powered by Mend.io,Qodana
+src/main/java/com/kov/votingsystem/model/Poll.java,14,ShortClassName,Avoid short class names like Poll,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,15,ShortVariable,Avoid variables with short names like id,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,19,LongVariable,Avoid excessively long variable names like participantToOption,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,21,MethodArgumentCouldBeFinal;MethodArgumentCouldBeFinal,Parameter 'question' is not assigned and could be declared final | Parameter 'options' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,27,LocalVariableCouldBeFinal,Local variable 'opt' could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,29,CollapsibleIfStatements,This if statement could be combined with its parent,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,51,MethodArgumentCouldBeFinal;MethodArgumentCouldBeFinal,Parameter 'participantId' is not assigned and could be declared final | Parameter 'option' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/model/Poll.java,62,ExceptionAsFlowControl,Exception thrown at line 60 is caught in this block.,,,PMD
+src/main/java/com/kov/votingsystem/exception/PollClosedException.java,4,MethodArgumentCouldBeFinal,Parameter 'message' is not assigned and could be declared final,,,PMD
+src/main/java/com/kov/votingsystem/exception/PollNotFoundException.java,4,MethodArgumentCouldBeFinal,Parameter 'message' is not assigned and could be declared final,,,PMD

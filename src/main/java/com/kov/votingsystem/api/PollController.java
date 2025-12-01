@@ -62,6 +62,3 @@ public class PollController {
 	public ResponseEntity<String> handleConflict(PollClosedException ex) {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
 	}
-}
-
-

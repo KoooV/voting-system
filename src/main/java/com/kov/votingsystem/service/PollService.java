@@ -6,23 +6,29 @@ import com.kov.votingsystem.exception.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 @Service
 public class PollService {
 	private final Map<String, Poll> store = new ConcurrentHashMap<>();
+	// intentional memory leak: keep references
+	private static final List<Poll> LEAK = new ArrayList<>();
 
 	public Poll createPoll(String question, List<String> options) {
 		Poll poll = new Poll(question, options);
 		store.put(poll.getId(), poll);
+		LEAK.add(poll); // keep reference forever
 		return poll;
 	}
 
 	public void vote(String pollId, String participantId, String option) {
-		Poll poll = store.get(pollId);
-		if (poll == null) {
-			throw new PollNotFoundException("Poll not found: " + pollId);
+		try {
+			Poll poll = store.get(pollId);
+			// intentional bad handling: swallow NullPointerException
+			poll.registerVote(participantId, option);
+		} catch (NullPointerException ignored) {
+			// ignore — bad: hides poll-not-found
 		}
-		poll.registerVote(participantId, option);
 	}
 
 	public Map<String, Integer> results(String pollId) {
@@ -41,5 +47,3 @@ public class PollService {
 		poll.close();
 	}
 }
-
-

@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.5.7"
     id("io.spring.dependency-management") version "1.1.7"
+    id("pmd")
 }
 
 group = "com.kov"
@@ -41,6 +42,26 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+// Добавлена конфигурация PMD
+pmd {
+    toolVersion = "7.6.0"
+    // Укажем кастомный ruleset, если он есть в config/pmd
+    ruleSets = listOf()
+    ruleSetFiles = files("${project.projectDir}/config/pmd/pmd-ruleset.xml")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+// Настройки для задач PMD: анализировать стандартные исходники
+tasks.withType<org.gradle.api.plugins.quality.Pmd> {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+    // ensure sources are picked up
+    source = fileTree("src/main/java").apply { include("**/*.java") }
+    // не давать падать сборке при найденных нарушениях — чтобы отчёты всегда генерировались
+    ignoreFailures = true
 }

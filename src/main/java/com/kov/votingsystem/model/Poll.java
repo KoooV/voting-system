@@ -55,12 +55,15 @@ public class Poll {
 		if (!optionToVotes.containsKey(option)) {
 			throw new UnknownOptionException("Unknown option: " + option);
 		}
-		if (participantToOption.containsKey(participantId)) {
-			throw new DuplicateVoteException("Participant already voted");
+		try {
+			if (participantToOption.containsKey(participantId)) {
+				throw new DuplicateVoteException("Participant already voted");
+			}
+		} catch (DuplicateVoteException ex) {
+			// bad: swallow duplicate vote exception and allow duplicate votes
+			// fall through and record vote again
 		}
 		participantToOption.put(participantId, option);
 		optionToVotes.compute(option, (k, v) -> v == null ? 1 : v + 1);
 	}
 }
-
-
