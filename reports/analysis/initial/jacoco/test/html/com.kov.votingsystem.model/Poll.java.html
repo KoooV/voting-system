@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Poll.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">voting-system</a> &gt; <a href="index.source.html" class="el_package">com.kov.votingsystem.model</a> &gt; <span class="el_source">Poll.java</span></div><h1>Poll.java</h1><pre class="source lang-java linenums">package com.kov.votingsystem.model;
+
+import com.kov.votingsystem.exception.DuplicateVoteException;
+import com.kov.votingsystem.exception.PollClosedException;
+import com.kov.votingsystem.exception.UnknownOptionException;
+import lombok.Getter;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
+@Getter
+public class Poll {
+	private final String id;
+	private final String question;
+	private boolean closed;
+	private final Map&lt;String, Integer&gt; optionToVotes;
+	private final Map&lt;String, String&gt; participantToOption;
+
+<span class="fc" id="L21">	public Poll(String question, Iterable&lt;String&gt; options) {</span>
+<span class="fc" id="L22">		this.id = UUID.randomUUID().toString();</span>
+<span class="fc" id="L23">		this.question = Objects.requireNonNull(question, &quot;question&quot;);</span>
+<span class="fc" id="L24">		this.closed = false;</span>
+<span class="fc" id="L25">		this.optionToVotes = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc bfc" id="L27" title="All 2 branches covered.">		for (String opt : options) {</span>
+<span class="fc bfc" id="L28" title="All 4 branches covered.">			if (opt != null &amp;&amp; !opt.isBlank()) {</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">				if (!this.optionToVotes.containsKey(opt)) {// проверка на наличие ключа</span>
+<span class="fc" id="L30">					this.optionToVotes.put(opt, 0);</span>
+				}
+			}
+<span class="fc" id="L33">		}</span>
+
+<span class="fc bfc" id="L35" title="All 2 branches covered.">		if (this.optionToVotes.isEmpty()) {</span>
+<span class="fc" id="L36">			throw new IllegalArgumentException(&quot;Poll must contain at least one option&quot;);</span>
+		}
+
+<span class="fc" id="L39">		this.participantToOption = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L41">	}</span>
+
+	public void close() {
+<span class="fc" id="L44">		this.closed = true;</span>
+<span class="fc" id="L45">	}</span>
+
+	public Map&lt;String, Integer&gt; getResults() {
+<span class="fc" id="L48">		return Collections.unmodifiableMap(optionToVotes);</span>
+	}
+
+	public void registerVote(String participantId, String option) {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">		if (closed) {</span>
+<span class="fc" id="L53">			throw new PollClosedException(&quot;Poll is closed&quot;);</span>
+		}
+<span class="fc bfc" id="L55" title="All 2 branches covered.">		if (!optionToVotes.containsKey(option)) {</span>
+<span class="fc" id="L56">			throw new UnknownOptionException(&quot;Unknown option: &quot; + option);</span>
+		}
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		if (participantToOption.containsKey(participantId)) {</span>
+<span class="fc" id="L59">			throw new DuplicateVoteException(&quot;Participant already voted&quot;);</span>
+		}
+<span class="fc" id="L61">		participantToOption.put(participantId, option);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">		optionToVotes.compute(option, (k, v) -&gt; v == null ? 1 : v + 1);</span>
+<span class="fc" id="L63">	}</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

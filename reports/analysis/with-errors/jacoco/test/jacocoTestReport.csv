@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+voting-system,com.kov.votingsystem.api,PollController,30,37,0,0,6,9,5,3,5,3
+voting-system,com.kov.votingsystem.api,PollController.CreatePollResponse,0,12,0,0,0,1,0,1,0,1
+voting-system,com.kov.votingsystem.api,PollController.CreatePollRequest,0,9,0,0,0,1,0,1,0,1
+voting-system,com.kov.votingsystem.api,PollController.VoteRequest,0,9,0,0,0,1,0,1,0,1
+voting-system,com.kov.votingsystem.service,PollService,13,60,3,3,3,17,3,5,0,5
+voting-system,com.kov.votingsystem,VotingSystemApplication,5,3,0,0,2,1,1,1,1,1
+voting-system,com.kov.votingsystem.exception,UnknownOptionException,0,4,0,0,0,2,0,1,0,1
+voting-system,com.kov.votingsystem.exception,PollNotFoundException,4,0,0,0,2,0,1,0,1,0
+voting-system,com.kov.votingsystem.exception,PollClosedException,0,4,0,0,0,2,0,1,0,1
+voting-system,com.kov.votingsystem.exception,DuplicateVoteException,0,4,0,0,0,2,0,1,0,1
+voting-system,com.kov.votingsystem.model,Poll,2,139,1,19,0,29,1,14,0,5

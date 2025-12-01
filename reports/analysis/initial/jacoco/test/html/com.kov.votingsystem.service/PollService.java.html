@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PollService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">voting-system</a> &gt; <a href="index.source.html" class="el_package">com.kov.votingsystem.service</a> &gt; <span class="el_source">PollService.java</span></div><h1>PollService.java</h1><pre class="source lang-java linenums">package com.kov.votingsystem.service;
+
+import com.kov.votingsystem.model.Poll;
+import org.springframework.stereotype.Service;
+import com.kov.votingsystem.exception.*;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Service
+<span class="fc" id="L11">public class PollService {</span>
+<span class="fc" id="L12">	private final Map&lt;String, Poll&gt; store = new ConcurrentHashMap&lt;&gt;();</span>
+
+	public Poll createPoll(String question, List&lt;String&gt; options) {
+<span class="fc" id="L15">		Poll poll = new Poll(question, options);</span>
+<span class="fc" id="L16">		store.put(poll.getId(), poll);</span>
+<span class="fc" id="L17">		return poll;</span>
+	}
+
+	public void vote(String pollId, String participantId, String option) {
+<span class="fc" id="L21">		Poll poll = store.get(pollId);</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">		if (poll == null) {</span>
+<span class="nc" id="L23">			throw new PollNotFoundException(&quot;Poll not found: &quot; + pollId);</span>
+		}
+<span class="fc" id="L25">		poll.registerVote(participantId, option);</span>
+<span class="fc" id="L26">	}</span>
+
+	public Map&lt;String, Integer&gt; results(String pollId) {
+<span class="fc" id="L29">		Poll poll = store.get(pollId);</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">		if (poll == null) {</span>
+<span class="nc" id="L31">			throw new PollNotFoundException(&quot;Poll not found: &quot; + pollId);</span>
+		}
+<span class="fc" id="L33">		return poll.getResults();</span>
+	}
+
+	public void close(String pollId) {
+<span class="fc" id="L37">		Poll poll = store.get(pollId);</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">		if (poll == null) {</span>
+<span class="nc" id="L39">			throw new PollNotFoundException(&quot;Poll not found: &quot; + pollId);</span>
+		}
+<span class="fc" id="L41">		poll.close();</span>
+<span class="fc" id="L42">	}</span>
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
